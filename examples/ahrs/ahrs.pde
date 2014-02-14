@@ -17,6 +17,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*  Set the baud rate to 115200 to use this sketch, and adjust the
+    output units by entering one of the following commands in the
+    Serial Monitor and clicking the "send" button:    
+
+    "output_euler"    - Euler angle output (default value)
+    "output_mat"      - NED cosine matrix output
+    "output_quat"     - Quaternion output
+*/
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <EEPROM.h>
