@@ -16,6 +16,7 @@ bool Adafruit_9DOF::begin() {
   if (!_gyro.begin()) {
     return false;
   }
+  return true;
 }
 
 Adafruit_Sensor* Adafruit_9DOF::getSensor(sensors_type_t type) {
