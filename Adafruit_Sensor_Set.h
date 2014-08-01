@@ -8,7 +8,7 @@ class Adafruit_Sensor_Set
 {
 public:
   virtual ~Adafruit_Sensor_Set() {}
-  Adafruit_Sensor* getSensor(sensors_type_t type) { return NULL; }
+  virtual Adafruit_Sensor* getSensor(sensors_type_t type) { return NULL; }
 };
 
 #endif
