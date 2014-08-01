@@ -20,6 +20,7 @@ bool Adafruit_10DOF::begin() {
   if (!_bmp.begin()) {
     return false;
   }
+  return true;
 }
 
 Adafruit_Sensor* Adafruit_10DOF::getSensor(sensors_type_t type) {
