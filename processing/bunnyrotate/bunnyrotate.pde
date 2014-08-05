@@ -79,7 +79,7 @@ void draw()
   pointLight(255, 255, 255,    0,   0, -500);
   
   // Displace objects from 0,0
-  translate(200, 350, 0);
+  translate(200, 250, 0);
   
   // Rotate shapes around the X/Y/Z axis (values in radians, 0..Pi*2)
   rotateX(radians(roll));
