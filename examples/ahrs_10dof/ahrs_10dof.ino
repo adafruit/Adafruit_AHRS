@@ -1,13 +1,16 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_L3GD20_U.h>
 #include <Adafruit_LSM303_U.h>
 #include <Adafruit_BMP085_U.h>
-#include <Adafruit_10DOF.h>
 #include <Adafruit_Simple_AHRS.h>
 
-Adafruit_10DOF board;
-Adafruit_Simple_AHRS ahrs(board);
+// Create sensor instances.
+Adafruit_LSM303_Accel_Unified accel(30301);
+Adafruit_LSM303_Mag_Unified   mag(30302);
+Adafruit_BMP085_Unified       bmp(18001);
+
+// Create simple AHRS algorithm using the above sensors.
+Adafruit_Simple_AHRS          ahrs(&accel, &mag);
 
 // Update this with the correct SLP for accurate altitude measurements
 float seaLevelPressure = SENSORS_PRESSURE_SEALEVELHPA;
@@ -15,10 +18,12 @@ float seaLevelPressure = SENSORS_PRESSURE_SEALEVELHPA;
 void setup()
 {
   Serial.begin(115200);
-  Serial.println(F("Adafruit 10 DOF Pitch/Roll/Heading Example")); Serial.println("");
+  Serial.println(F("Adafruit 10 DOF Board AHRS Example")); Serial.println("");
   
-  // Initialize the board.
-  board.begin();
+  // Initialize the sensors.
+  accel.begin();
+  mag.begin();
+  bmp.begin();
 }
 
 void loop(void)
@@ -40,15 +45,15 @@ void loop(void)
 
   // Calculate the altitude using the barometric pressure sensor
   sensors_event_t bmp_event;
-  board.getBMP().getEvent(&bmp_event);
+  bmp.getEvent(&bmp_event);
   if (bmp_event.pressure)
   {
     /* Get ambient temperature in C */
     float temperature;
-    board.getBMP().getTemperature(&temperature);
+    bmp.getTemperature(&temperature);
     /* Convert atmospheric pressure, SLP and temp to altitude */
     Serial.print(F("Alt: "));
-    Serial.print(board.getBMP().pressureToAltitude(seaLevelPressure,
+    Serial.print(bmp.pressureToAltitude(seaLevelPressure,
                                         bmp_event.pressure,
                                         temperature)); 
     Serial.println(F(""));

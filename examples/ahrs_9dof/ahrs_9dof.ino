@@ -1,24 +1,23 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_L3GD20_U.h>
 #include <Adafruit_LSM303_U.h>
-#include <Adafruit_BMP085_U.h>
-#include <Adafruit_9DOF.h>
 #include <Adafruit_Simple_AHRS.h>
 
-Adafruit_9DOF board;
-Adafruit_Simple_AHRS ahrs(board);
+// Create sensor instances.
+Adafruit_LSM303_Accel_Unified accel(30301);
+Adafruit_LSM303_Mag_Unified   mag(30302);
 
-// Update this with the correct SLP for accurate altitude measurements
-float seaLevelPressure = SENSORS_PRESSURE_SEALEVELHPA;
+// Create simple AHRS algorithm using the above sensors.
+Adafruit_Simple_AHRS          ahrs(&accel, &mag);
 
 void setup()
 {
   Serial.begin(115200);
-  Serial.println(F("Adafruit 10 DOF Pitch/Roll/Heading Example")); Serial.println("");
+  Serial.println(F("Adafruit 9 DOF Board AHRS Example")); Serial.println("");
   
-  // Initialize the board.
-  board.begin();
+  // Initialize the sensors.
+  accel.begin();
+  mag.begin();
 }
 
 void loop(void)
