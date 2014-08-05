@@ -27,7 +27,7 @@ GCheckbox printSerialCheckbox;
 
 void setup()
 {
-  size(400, 500, OPENGL);
+  size(400, 550, OPENGL);
   frameRate(30);
   model = new OBJModel(this);
   model.load("bunny.obj");
@@ -79,7 +79,7 @@ void draw()
   pointLight(255, 255, 255,    0,   0, -500);
   
   // Displace objects from 0,0
-  translate(200, 250, 0);
+  translate(200, 300, 0);
   
   // Rotate shapes around the X/Y/Z axis (values in radians, 0..Pi*2)
   rotateX(radians(roll));
