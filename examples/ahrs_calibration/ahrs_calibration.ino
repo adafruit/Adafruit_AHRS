@@ -63,7 +63,7 @@ void loop(void)
 
   // Print the sensor data
   Serial.print("Raw:");
-  Serial.print(gyro.raw.x);
+  Serial.print(accel.raw.x);
   Serial.print(',');
   Serial.print(accel.raw.y);
   Serial.print(',');
