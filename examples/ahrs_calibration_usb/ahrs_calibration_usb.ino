@@ -6,8 +6,8 @@
 #define NXP_FXOS8700_FXAS21002      (2)
 
 // Define your target sensor(s) here based on the list above!
-#define AHRS_VARIANT    ST_LSM303DLHC_L3GD20
-// #define AHRS_VARIANT   NXP_FXOS8700_FXAS21002
+// #define AHRS_VARIANT    ST_LSM303DLHC_L3GD20
+#define AHRS_VARIANT   NXP_FXOS8700_FXAS21002
 
 // Include appropriate sensor driver(s)
 #if AHRS_VARIANT == ST_LSM303DLHC_L3GD20
