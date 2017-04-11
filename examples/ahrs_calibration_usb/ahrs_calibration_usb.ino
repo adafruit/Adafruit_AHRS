@@ -43,10 +43,6 @@ Adafruit_FXOS8700 accelmag = Adafruit_FXOS8700(0x8700A, 0x8700B);
 //
 // You should end up with 3 offsets for X/Y/Z, which are displayed
 // in the top-right corner of the application.
-//
-// Make sure you have the latest versions of the Adfruit_L3GD20_U and
-// Adafruit_LSM303_U libraries when running this sketch since they
-// use a new .raw field added in the latest versions (Oct 10 2016)
 
 void setup()
 {
