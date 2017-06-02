@@ -15,8 +15,8 @@
 #define BLUEFRUIT51_NXP_FXOS8700_FXAS21002      (2)
 
 // Define your target sensor(s) here based on the list above!
-#define AHRS_VARIANT    BLUEFRUIT51_ST_LSM303DLHC_L3GD20
-//#define AHRS_VARIANT   BLUEFRUIT51_NXP_FXOS8700_FXAS21002
+// #define AHRS_VARIANT    BLUEFRUIT51_ST_LSM303DLHC_L3GD20
+#define AHRS_VARIANT   BLUEFRUIT51_NXP_FXOS8700_FXAS21002
 
 // Config
 #define FACTORYRESET_ENABLE      1
@@ -118,8 +118,10 @@ void setup()
 #endif
 
   // Filter expects 25 samples per second
-  filter.begin(25);
-
+  // The filter only seems to be responsive with a much smaller value, though!
+  // ToDo: Figure out the disparity between actual refresh rate and the value
+  // provided here!
+  filter.begin(5);
 
     // Initialise the module
   Serial.print(F("Initialising the Bluefruit LE module: "));

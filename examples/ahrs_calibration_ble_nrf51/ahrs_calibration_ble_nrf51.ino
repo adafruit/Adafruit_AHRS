@@ -9,8 +9,8 @@
 #define BLUEFRUIT51_NXP_FXOS8700_FXAS21002      (2)
 
 // Define your target sensor(s) here based on the list above!
-#define AHRS_VARIANT    BLUEFRUIT51_ST_LSM303DLHC_L3GD20
-// #define AHRS_VARIANT   BLUEFRUIT51_NXP_FXOS8700_FXAS21002
+// #define AHRS_VARIANT    BLUEFRUIT51_ST_LSM303DLHC_L3GD20
+#define AHRS_VARIANT   BLUEFRUIT51_NXP_FXOS8700_FXAS21002
 
 #include "Adafruit_BLE.h"
 #include "Adafruit_BluefruitLE_SPI.h"
