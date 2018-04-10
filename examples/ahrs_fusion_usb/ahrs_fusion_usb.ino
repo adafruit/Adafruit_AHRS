@@ -39,7 +39,7 @@ Adafruit_FXOS8700 accelmag = Adafruit_FXOS8700(0x8700A, 0x8700B);
 #endif
 
 // Mag calibration values are calculated via ahrs_calibration.
-// These values must be determined for each baord/environment.
+// These values must be determined for each board/environment.
 // See the image in this sketch folder for the values used
 // below.
 
