@@ -1,5 +1,5 @@
-// Full orientation sensing using NXP/Madge.
-//
+// Full orientation sensing using NXP/Madgwick/Mahony and a range of 9-DoF
+// sensor sets.
 // You *must* perform a magnetic calibration before this code will work.
 //
 // To view this data, use the Arduino Serial Monitor to watch the
@@ -13,8 +13,8 @@
 Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 
 // uncomment one combo 9-DoF!
-#include "LSM6DS_LIS3MDL.h"  // can adjust to LSM6DS33, LSM6DS3U, LSM6DSOX...
-//#include "LSM9DS1.h"
+//#include "LSM6DS_LIS3MDL.h"  // can adjust to LSM6DS33, LSM6DS3U, LSM6DSOX...
+#include "LSM9DS.h"           // LSM9DS1 or LSM9DS0
 //#include "NXP_FXOS_FXAS.h"  // NXP 9-DoF breakout
 
 Adafruit_Sensor_Calibration cal;
@@ -67,6 +67,7 @@ void loop() {
   accelerometer->getEvent(&accel);
   gyroscope->getEvent(&gyro);
   magnetometer->getEvent(&mag);
+  //Serial.print("I2C took "); Serial.print(millis()-timestamp); Serial.println(" ms");
 
   cal.calibrate(mag);
   cal.calibrate(accel);
@@ -76,7 +77,13 @@ void loop() {
   gx = gyro.gyro.x * SENSORS_RADS_TO_DPS;
   gy = gyro.gyro.y * SENSORS_RADS_TO_DPS;
   gz = gyro.gyro.z * SENSORS_RADS_TO_DPS;
-  
+
+  // Update the SensorFusion filter
+  filter.update(gx, gy, gz, 
+                accel.acceleration.x, accel.acceleration.y, accel.acceleration.z, 
+                mag.magnetic.x, mag.magnetic.y, mag.magnetic.z);
+  //Serial.print("Update took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+
   Serial.print("Raw: ");
   Serial.print(accel.acceleration.x, 4); Serial.print(", ");
   Serial.print(accel.acceleration.y, 4); Serial.print(", ");
@@ -87,11 +94,6 @@ void loop() {
   Serial.print(mag.magnetic.x, 4); Serial.print(", ");
   Serial.print(mag.magnetic.y, 4); Serial.print(", ");
   Serial.print(mag.magnetic.z, 4); Serial.println("");
-
-  // Update the SensorFusion filter
-  filter.update(gx, gy, gz, 
-                accel.acceleration.x, accel.acceleration.y, accel.acceleration.z, 
-                mag.magnetic.x, mag.magnetic.y, mag.magnetic.z);
 
   // print the heading, pitch and roll
   roll = filter.getRoll();
