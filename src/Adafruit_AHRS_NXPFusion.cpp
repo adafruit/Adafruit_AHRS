@@ -30,7 +30,7 @@
 // it up.
 //
 
-#include "NXPFusion.h"
+#include "Adafruit_AHRS_NXPFusion.h"
 
 // kalman filter noise variances
 #define FQVA_9DOF_GBY_KALMAN 2E-6F              // accelerometer noise g^2 so 1.4mg RMS
@@ -61,7 +61,7 @@
 #define ONEOVER3840 0.0002604166667F  // 1 / 3840
 
 
-#define Quaternion_t NXPSensorFusion::Quaternion_t
+#define Quaternion_t Adafruit_NXPSensorFusion::Quaternion_t
 
 static void fqAeq1(Quaternion_t *pqA);
 static void feCompassNED(float fR[][3], float *pfDelta, const float fBc[], const float fGp[]);
@@ -96,7 +96,7 @@ void fmatrixAeqRenormRotA(float A[][3]);
 
 
 // initialize the 9DOF Kalman filter
-void NXPSensorFusion::begin(float sampleRate)
+void Adafruit_NXPSensorFusion::begin(float sampleRate)
 {
   int8_t i, j;
 
@@ -176,7 +176,7 @@ void NXPSensorFusion::begin(float sampleRate)
     //const AccelSensor_t *Accel, const MagSensor_t *Mag, const GyroSensor_t *Gyro,
     //const MagCalibration_t *MagCal)
 
-void NXPSensorFusion::update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
+void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
 {
   float Accel[3]={ax, ay, az}; // Accel
   float Yp[3]={gx, gy, gz}; // Gryo
