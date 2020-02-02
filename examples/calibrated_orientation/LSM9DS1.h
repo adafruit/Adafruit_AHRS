@@ -2,13 +2,13 @@
 Adafruit_LSM9DS1 lsm9ds1 = Adafruit_LSM9DS1();
 
 bool init_sensors(void) {
-  if  (!lsm9ds1.begin()) {
+  if (!lsm9ds1.begin()) {
     return false;
   }
   accelerometer = &lsm9ds1.getAccel();
   gyroscope = &lsm9ds1.getGyro();
   magnetometer = &lsm9ds1.getMag();
-  
+
   return true;
 }
 

@@ -6,7 +6,7 @@ Adafruit_LIS3MDL lis3mdl;
 Adafruit_LSM6DSOX lsm6ds;
 
 bool init_sensors(void) {
-  if  (!lsm6ds.begin_I2C() || !lis3mdl.begin_I2C()) {
+  if (!lsm6ds.begin_I2C() || !lis3mdl.begin_I2C()) {
     return false;
   }
   accelerometer = lsm6ds.getAccelerometerSensor();
