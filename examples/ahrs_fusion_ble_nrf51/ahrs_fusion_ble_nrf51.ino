@@ -1,8 +1,5 @@
-#include <Wire.h>
-#include <SPI.h>
-#include <Adafruit_Sensor.h>
-#include "Mahony.h"
-#include "Madgwick.h"
+#include "Adafruit_AHRS_Mahony.h"
+#include "Adafruit_AHRS_Madgwick.h"
 #include "Adafruit_BLE.h"
 #include "Adafruit_BluefruitLE_SPI.h"
 #include "Adafruit_BluefruitLE_UART.h"
@@ -75,8 +72,8 @@ float gyro_zero_offsets[3]      = { 175.0F * rawToDPS * dpsToRad,
 
 // Mahony is lighter weight as a filter and should be used
 // on slower systems
-Mahony filter;
-//Madgwick filter;
+Adafruit_Mahony filter;
+//Adafruit_Madgwick filter;
 
 void setup()
 {
