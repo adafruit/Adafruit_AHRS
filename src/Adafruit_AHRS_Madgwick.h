@@ -14,13 +14,13 @@
 // 02/10/2011	SOH Madgwick	Optimised for reduced CPU load
 //
 //=============================================================================================
-#ifndef __Madgwick_h__
-#define __Madgwick_h__
+#ifndef __Adafruit_Madgwick_h__
+#define __Adafruit_Madgwick_h__
 #include <math.h>
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
-class Madgwick{
+class Adafruit_Madgwick{
 private:
     static float invSqrt(float x);
     float beta;				// algorithm gain
@@ -38,7 +38,7 @@ private:
 //-------------------------------------------------------------------------------------------
 // Function declarations
 public:
-    Madgwick(void);
+    Adafruit_Madgwick(void);
     void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
     void update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz);
     void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
@@ -69,7 +69,7 @@ public:
         if (!anglesComputed) computeAngles();
         return yaw;
     }
-	void getQuaternion(float *w, float *x, float *y, float *z) {
+    void getQuaternion(float *w, float *x, float *y, float *z) {
        *w = q0;
        *x = q1;
        *y = q2;

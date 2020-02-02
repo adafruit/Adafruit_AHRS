@@ -1,5 +1,5 @@
 //=============================================================================================
-// Mahony.h
+// Adafruit_AHRS_Mahony.h
 //=============================================================================================
 //
 // Madgwick's implementation of Mayhony's AHRS algorithm.
@@ -10,14 +10,14 @@
 // 02/10/2011	SOH Madgwick	Optimised for reduced CPU load
 //
 //=============================================================================================
-#ifndef __Mahony_h__
-#define __Mahony_h__
+#ifndef __Adafruit_Mahony_h__
+#define __Adafruit_Mahony_h__
 #include <math.h>
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
 
-class Mahony {
+class Adafruit_Mahony {
 private:
 	float twoKp;		// 2 * proportional gain (Kp)
 	float twoKi;		// 2 * integral gain (Ki)
@@ -33,7 +33,7 @@ private:
 // Function declarations
 
 public:
-	Mahony();
+	Adafruit_Mahony();
 	void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
 	void update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz);
 	void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);

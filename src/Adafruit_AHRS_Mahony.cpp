@@ -1,5 +1,5 @@
 //=============================================================================================
-// Mahony.c
+// Adafruit_Mahony.c
 //=============================================================================================
 //
 // Madgwick's implementation of Mayhony's AHRS algorithm.
@@ -21,7 +21,7 @@
 //-------------------------------------------------------------------------------------------
 // Header files
 
-#include "Mahony.h"
+#include "Adafruit_AHRS_Mahony.h"
 #include <math.h>
 
 //-------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@
 //-------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
-Mahony::Mahony()
+Adafruit_Mahony::Adafruit_Mahony()
 {
 	twoKp = twoKpDef;	// 2 * proportional gain (Kp)
 	twoKi = twoKiDef;	// 2 * integral gain (Ki)
@@ -53,7 +53,7 @@ Mahony::Mahony()
 	invSampleFreq = 1.0f / DEFAULT_SAMPLE_FREQ;
 }
 
-void Mahony::update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
+void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz)
 {
 	float recipNorm;
 	float q0q0, q0q1, q0q2, q0q3, q1q1, q1q2, q1q3, q2q2, q2q3, q3q3;
@@ -167,7 +167,7 @@ void Mahony::update(float gx, float gy, float gz, float ax, float ay, float az, 
 //-------------------------------------------------------------------------------------------
 // IMU algorithm update
 
-void Mahony::updateIMU(float gx, float gy, float gz, float ax, float ay, float az)
+void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax, float ay, float az)
 {
 	float recipNorm;
 	float halfvx, halfvy, halfvz;
@@ -246,7 +246,7 @@ void Mahony::updateIMU(float gx, float gy, float gz, float ax, float ay, float a
 // Fast inverse square-root
 // See: http://en.wikipedia.org/wiki/Fast_inverse_square_root
 
-float Mahony::invSqrt(float x)
+float Adafruit_Mahony::invSqrt(float x)
 {
 	float halfx = 0.5f * x;
 	float y = x;
@@ -260,7 +260,7 @@ float Mahony::invSqrt(float x)
 
 //-------------------------------------------------------------------------------------------
 
-void Mahony::computeAngles()
+void Adafruit_Mahony::computeAngles()
 {
 	roll = atan2f(q0*q1 + q2*q3, 0.5f - q1*q1 - q2*q2);
 	pitch = asinf(-2.0f * (q1*q3 - q0*q2));
