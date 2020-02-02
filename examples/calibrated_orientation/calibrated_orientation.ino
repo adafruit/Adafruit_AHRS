@@ -10,6 +10,8 @@
 #include <Adafruit_Sensor_Calibration.h>
 #include <Adafruit_AHRS.h>
 
+#define SENSORS_RADS_TO_DPS (180.0 / 3.141592653589793238463)
+
 Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 
 // uncomment one combo 9-DoF!
