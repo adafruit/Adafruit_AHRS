@@ -17,14 +17,21 @@ Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 //#include "LSM9DS.h"           // LSM9DS1 or LSM9DS0
 //#include "NXP_FXOS_FXAS.h"  // NXP 9-DoF breakout
 
-Adafruit_Sensor_Calibration cal;
-
 // pick your filter! slower == better quality output
 //Adafruit_NXPSensorFusion filter; // slowest
 //Adafruit_Madgwick filter;  // faster than NXP
-Adafruit_Mahony filter;  // fastest/smalleset
+Adafruit_Mahony filter;  // fastest/smallest
+
+#if defined(ADAFRUIT_SENSOR_CALIBRATION_USE_EEPROM)
+  Adafruit_Sensor_Calibration_EEPROM cal;
+#else
+  Adafruit_Sensor_Calibration_SDFat cal;
+#endif
 
 #define FILTER_UPDATE_RATE_HZ 100
+#define PRINT_EVERY_N_UPDATES 10
+//#define AHRS_DEBUG_OUTPUT
+
 uint32_t timestamp;
 
 void setup() {
@@ -57,6 +64,7 @@ void setup() {
 void loop() {
   float roll, pitch, heading;
   float gx, gy, gz;
+  static uint8_t counter = 0;
 
   if ((millis() - timestamp) < (1000 / FILTER_UPDATE_RATE_HZ)) {
     return;
@@ -67,7 +75,9 @@ void loop() {
   accelerometer->getEvent(&accel);
   gyroscope->getEvent(&gyro);
   magnetometer->getEvent(&mag);
-  //Serial.print("I2C took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+#if defined(AHRS_DEBUG_OUTPUT)
+  Serial.print("I2C took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+#endif
 
   cal.calibrate(mag);
   cal.calibrate(accel);
@@ -82,8 +92,18 @@ void loop() {
   filter.update(gx, gy, gz, 
                 accel.acceleration.x, accel.acceleration.y, accel.acceleration.z, 
                 mag.magnetic.x, mag.magnetic.y, mag.magnetic.z);
-  //Serial.print("Update took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+#if defined(AHRS_DEBUG_OUTPUT)
+  Serial.print("Update took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+#endif
 
+  // only print the calculated output once in a while
+  if (counter++ <= PRINT_EVERY_N_UPDATES) {
+    return;
+  }
+  // reset the counter
+  counter = 0;
+
+#if defined(AHRS_DEBUG_OUTPUT)
   Serial.print("Raw: ");
   Serial.print(accel.acceleration.x, 4); Serial.print(", ");
   Serial.print(accel.acceleration.y, 4); Serial.print(", ");
@@ -94,6 +114,7 @@ void loop() {
   Serial.print(mag.magnetic.x, 4); Serial.print(", ");
   Serial.print(mag.magnetic.y, 4); Serial.print(", ");
   Serial.print(mag.magnetic.z, 4); Serial.println("");
+#endif
 
   // print the heading, pitch and roll
   roll = filter.getRoll();
@@ -101,9 +122,12 @@ void loop() {
   heading = filter.getYaw();
   Serial.print("Orientation: ");
   Serial.print(heading);
-  Serial.print(" ");
+  Serial.print(", ");
   Serial.print(pitch);
-  Serial.print(" ");
+  Serial.print(", ");
   Serial.println(roll);
+  
+#if defined(AHRS_DEBUG_OUTPUT)
   Serial.print("Took "); Serial.print(millis()-timestamp); Serial.println(" ms");
+#endif
 }
