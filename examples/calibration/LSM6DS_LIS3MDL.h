@@ -1,9 +1,9 @@
 #include <Adafruit_LIS3MDL.h>
 Adafruit_LIS3MDL lis3mdl;
 
-// Can change this to be LSM6DSOX or whatever ya like
-#include <Adafruit_LSM6DSOX.h>
-Adafruit_LSM6DSOX lsm6ds;
+// Can change this to be LSM6DS33 or whatever ya like
+#include <Adafruit_LSM6DS33.h>
+Adafruit_LSM6DS33 lsm6ds;
 
 bool init_sensors(void) {
   if (!lsm6ds.begin_I2C() || !lis3mdl.begin_I2C()) {

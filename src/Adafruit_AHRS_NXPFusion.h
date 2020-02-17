@@ -41,6 +41,13 @@ public:
   float getPitch() { return ThePl; }
   float getYaw() { return PsiPl; }
 
+  void getQuaternion(float *w, float *x, float *y, float *z) {
+    *w = qPl.q0;
+    *x = qPl.q1;
+    *y = qPl.q2;
+    *z = qPl.q3;
+  }
+
   typedef struct {
     float q0; // w
     float q1; // x

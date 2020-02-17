@@ -19,7 +19,13 @@ Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 //#include "LSM9DS.h"           // LSM9DS1 or LSM9DS0
 //#include "NXP_FXOS_FXAS.h"  // NXP 9-DoF breakout
 
-Adafruit_Sensor_Calibration cal;
+// select either EEPROM or SPI FLASH storage:
+#ifdef ADAFRUIT_SENSOR_CALIBRATION_USE_EEPROM
+  Adafruit_Sensor_Calibration_EEPROM cal;
+#else
+  Adafruit_Sensor_Calibration_SDFat cal;
+#endif
+
 sensors_event_t mag_event, gyro_event, accel_event;
 
 int loopcount = 0;
