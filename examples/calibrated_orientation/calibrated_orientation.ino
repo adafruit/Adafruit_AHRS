@@ -20,7 +20,7 @@ Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 // pick your filter! slower == better quality output
 //Adafruit_NXPSensorFusion filter; // slowest
 //Adafruit_Madgwick filter;  // faster than NXP
-Adafruit_Mahony filter;  // fastest/smallest
+Adafruit_Mahony filter;  // fastest/smalleset
 
 #if defined(ADAFRUIT_SENSOR_CALIBRATION_USE_EEPROM)
   Adafruit_Sensor_Calibration_EEPROM cal;
@@ -126,6 +126,17 @@ void loop() {
   Serial.print(pitch);
   Serial.print(", ");
   Serial.println(roll);
+
+  float qw, qx, qy, qz;
+  filter.getQuaternion(&qw, &qx, &qy, &qz);
+  Serial.print("Quaternion: ");
+  Serial.print(qw, 4);
+  Serial.print(", ");
+  Serial.print(qx, 4);
+  Serial.print(", ");
+  Serial.print(qy, 4);
+  Serial.print(", ");
+  Serial.println(qz, 4);  
   
 #if defined(AHRS_DEBUG_OUTPUT)
   Serial.print("Took "); Serial.print(millis()-timestamp); Serial.println(" ms");
