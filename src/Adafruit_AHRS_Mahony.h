@@ -12,12 +12,14 @@
 //=============================================================================================
 #ifndef __Adafruit_Mahony_h__
 #define __Adafruit_Mahony_h__
+
 #include <math.h>
+#include "Adafruit_AHRS_FusionInterface.h"
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
 
-class Adafruit_Mahony {
+class Adafruit_Mahony : public Adafruit_AHRS_FusionInterface {
 private:
   float twoKp; // 2 * proportional gain (Kp)
   float twoKi; // 2 * integral gain (Ki)
@@ -36,25 +38,29 @@ private:
 
 public:
   Adafruit_Mahony();
-  void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
-  void update(float gx, float gy, float gz, float ax, float ay, float az,
-              float mx, float my, float mz);
+  virtual void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
+  virtual void update(float gx, float gy, float gz, float ax, float ay, float az,
+                      float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
-  float getRoll() {
+
+  virtual float getRoll() {
     if (!anglesComputed)
       computeAngles();
     return roll * 57.29578f;
   }
-  float getPitch() {
+
+  virtual float getPitch() {
     if (!anglesComputed)
       computeAngles();
     return pitch * 57.29578f;
   }
-  float getYaw() {
+
+  virtual float getYaw() {
     if (!anglesComputed)
       computeAngles();
     return yaw * 57.29578f + 180.0f;
   }
+
   float getRollRadians() {
     if (!anglesComputed)
       computeAngles();
@@ -70,7 +76,8 @@ public:
       computeAngles();
     return yaw;
   }
-  void getQuaternion(float *w, float *x, float *y, float *z) {
+
+  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = q0;
     *x = q1;
     *y = q2;

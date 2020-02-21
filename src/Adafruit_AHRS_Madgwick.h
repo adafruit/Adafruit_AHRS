@@ -16,11 +16,13 @@
 //=============================================================================================
 #ifndef __Adafruit_Madgwick_h__
 #define __Adafruit_Madgwick_h__
+
 #include <math.h>
+#include "Adafruit_AHRS_FusionInterface.h"
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
-class Adafruit_Madgwick {
+class Adafruit_Madgwick : public Adafruit_AHRS_FusionInterface {
 private:
   static float invSqrt(float x);
   float beta; // algorithm gain
@@ -39,45 +41,51 @@ private:
   // Function declarations
 public:
   Adafruit_Madgwick(void);
-  void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
-  void update(float gx, float gy, float gz, float ax, float ay, float az,
-              float mx, float my, float mz);
+  virtual void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
+  virtual void update(float gx, float gy, float gz, float ax, float ay, float az,
+                      float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
   // float getPitch(){return atan2f(2.0f * q2 * q3 - 2.0f * q0 * q1, 2.0f * q0 *
   // q0 + 2.0f * q3 * q3 - 1.0f);}; float getRoll(){return -1.0f * asinf(2.0f *
   // q1 * q3 + 2.0f * q0 * q2);}; float getYaw(){return atan2f(2.0f * q1 * q2
   // - 2.0f * q0 * q3, 2.0f * q0 * q0 + 2.0f * q1 * q1 - 1.0f);};
-  float getRoll() {
+  virtual float getRoll() {
     if (!anglesComputed)
       computeAngles();
     return roll * 57.29578f;
   }
-  float getPitch() {
+
+  virtual float getPitch() {
     if (!anglesComputed)
       computeAngles();
     return pitch * 57.29578f;
   }
-  float getYaw() {
+
+  virtual float getYaw() {
     if (!anglesComputed)
       computeAngles();
     return yaw * 57.29578f + 180.0f;
   }
+
   float getRollRadians() {
     if (!anglesComputed)
       computeAngles();
     return roll;
   }
+
   float getPitchRadians() {
     if (!anglesComputed)
       computeAngles();
     return pitch;
   }
+
   float getYawRadians() {
     if (!anglesComputed)
       computeAngles();
     return yaw;
   }
-  void getQuaternion(float *w, float *x, float *y, float *z) {
+
+  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = q0;
     *x = q1;
     *y = q2;

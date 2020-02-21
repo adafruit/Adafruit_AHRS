@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "Adafruit_AHRS_FusionInterface.h"
 
 // This is a modification of
 // https://github.com/memsindustrygroup/Open-Source-Sensor-Fusion/blob/master/Sources/tasks.h
@@ -31,17 +32,17 @@
 //
 
 // changed class name to avoid collision
-class Adafruit_NXPSensorFusion {
+class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
-  void begin(float sampleRate = 100.0f);
-  void update(float gx, float gy, float gz, float ax, float ay, float az,
-              float mx, float my, float mz);
+  virtual void begin(float sampleRate = 100.0f);
+  virtual void update(float gx, float gy, float gz, float ax, float ay, float az,
+                      float mx, float my, float mz);
 
-  float getRoll() { return PhiPl; }
-  float getPitch() { return ThePl; }
-  float getYaw() { return PsiPl; }
+  virtual float getRoll() { return PhiPl; }
+  virtual float getPitch() { return ThePl; }
+  virtual float getYaw() { return PsiPl; }
 
-  void getQuaternion(float *w, float *x, float *y, float *z) {
+  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = qPl.q0;
     *x = qPl.q1;
     *y = qPl.q2;
