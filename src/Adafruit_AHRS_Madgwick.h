@@ -41,53 +41,45 @@ private:
   // Function declarations
 public:
   Adafruit_Madgwick(void);
-  virtual void begin(float sampleFrequency) {
-    invSampleFreq = 1.0f / sampleFrequency;
-  }
-  virtual void update(float gx, float gy, float gz, float ax, float ay,
-                      float az, float mx, float my, float mz);
+  void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
+  void update(float gx, float gy, float gz, float ax, float ay, float az,
+              float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
   // float getPitch(){return atan2f(2.0f * q2 * q3 - 2.0f * q0 * q1, 2.0f * q0 *
   // q0 + 2.0f * q3 * q3 - 1.0f);}; float getRoll(){return -1.0f * asinf(2.0f *
   // q1 * q3 + 2.0f * q0 * q2);}; float getYaw(){return atan2f(2.0f * q1 * q2
   // - 2.0f * q0 * q3, 2.0f * q0 * q0 + 2.0f * q1 * q1 - 1.0f);};
-  virtual float getRoll() {
+  float getRoll() {
     if (!anglesComputed)
       computeAngles();
     return roll * 57.29578f;
   }
-
-  virtual float getPitch() {
+  float getPitch() {
     if (!anglesComputed)
       computeAngles();
     return pitch * 57.29578f;
   }
-
-  virtual float getYaw() {
+  float getYaw() {
     if (!anglesComputed)
       computeAngles();
     return yaw * 57.29578f + 180.0f;
   }
-
   float getRollRadians() {
     if (!anglesComputed)
       computeAngles();
     return roll;
   }
-
   float getPitchRadians() {
     if (!anglesComputed)
       computeAngles();
     return pitch;
   }
-
   float getYawRadians() {
     if (!anglesComputed)
       computeAngles();
     return yaw;
   }
-
-  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
+  void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = q0;
     *x = q1;
     *y = q2;

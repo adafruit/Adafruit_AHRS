@@ -38,31 +38,25 @@ private:
 
 public:
   Adafruit_Mahony();
-  virtual void begin(float sampleFrequency) {
-    invSampleFreq = 1.0f / sampleFrequency;
-  }
-  virtual void update(float gx, float gy, float gz, float ax, float ay,
-                      float az, float mx, float my, float mz);
+  void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
+  void update(float gx, float gy, float gz, float ax, float ay, float az,
+              float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
-
-  virtual float getRoll() {
+  float getRoll() {
     if (!anglesComputed)
       computeAngles();
     return roll * 57.29578f;
   }
-
-  virtual float getPitch() {
+  float getPitch() {
     if (!anglesComputed)
       computeAngles();
     return pitch * 57.29578f;
   }
-
-  virtual float getYaw() {
+  float getYaw() {
     if (!anglesComputed)
       computeAngles();
     return yaw * 57.29578f + 180.0f;
   }
-
   float getRollRadians() {
     if (!anglesComputed)
       computeAngles();
@@ -78,8 +72,7 @@ public:
       computeAngles();
     return yaw;
   }
-
-  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
+  void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = q0;
     *x = q1;
     *y = q2;

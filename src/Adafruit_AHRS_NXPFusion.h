@@ -34,15 +34,15 @@
 // changed class name to avoid collision
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
-  virtual void begin(float sampleRate = 100.0f);
-  virtual void update(float gx, float gy, float gz, float ax, float ay,
-                      float az, float mx, float my, float mz);
+  void begin(float sampleRate = 100.0f);
+  void update(float gx, float gy, float gz, float ax, float ay, float az,
+              float mx, float my, float mz);
 
-  virtual float getRoll() { return PhiPl; }
-  virtual float getPitch() { return ThePl; }
-  virtual float getYaw() { return PsiPl; }
+  float getRoll() { return PhiPl; }
+  float getPitch() { return ThePl; }
+  float getYaw() { return PsiPl; }
 
-  virtual void getQuaternion(float *w, float *x, float *y, float *z) {
+  void getQuaternion(float *w, float *x, float *y, float *z) {
     *w = qPl.q0;
     *x = qPl.q1;
     *y = qPl.q2;
