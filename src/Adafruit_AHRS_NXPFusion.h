@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include "Adafruit_AHRS_FusionInterface.h"
+#include <Arduino.h>
 
 // This is a modification of
 // https://github.com/memsindustrygroup/Open-Source-Sensor-Fusion/blob/master/Sources/tasks.h
@@ -35,8 +35,8 @@
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
   virtual void begin(float sampleRate = 100.0f);
-  virtual void update(float gx, float gy, float gz, float ax, float ay, float az,
-                      float mx, float my, float mz);
+  virtual void update(float gx, float gy, float gz, float ax, float ay,
+                      float az, float mx, float my, float mz);
 
   virtual float getRoll() { return PhiPl; }
   virtual float getPitch() { return ThePl; }

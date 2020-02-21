@@ -17,8 +17,8 @@
 #ifndef __Adafruit_Madgwick_h__
 #define __Adafruit_Madgwick_h__
 
-#include <math.h>
 #include "Adafruit_AHRS_FusionInterface.h"
+#include <math.h>
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
@@ -41,9 +41,11 @@ private:
   // Function declarations
 public:
   Adafruit_Madgwick(void);
-  virtual void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
-  virtual void update(float gx, float gy, float gz, float ax, float ay, float az,
-                      float mx, float my, float mz);
+  virtual void begin(float sampleFrequency) {
+    invSampleFreq = 1.0f / sampleFrequency;
+  }
+  virtual void update(float gx, float gy, float gz, float ax, float ay,
+                      float az, float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
   // float getPitch(){return atan2f(2.0f * q2 * q3 - 2.0f * q0 * q1, 2.0f * q0 *
   // q0 + 2.0f * q3 * q3 - 1.0f);}; float getRoll(){return -1.0f * asinf(2.0f *
