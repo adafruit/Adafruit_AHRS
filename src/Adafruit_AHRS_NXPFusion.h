@@ -1,3 +1,4 @@
+#include "Adafruit_AHRS_FusionInterface.h"
 #include <Arduino.h>
 
 // This is a modification of
@@ -31,7 +32,7 @@
 //
 
 // changed class name to avoid collision
-class Adafruit_NXPSensorFusion {
+class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
   void begin(float sampleRate = 100.0f);
   void update(float gx, float gy, float gz, float ax, float ay, float az,

@@ -16,11 +16,13 @@
 //=============================================================================================
 #ifndef __Adafruit_Madgwick_h__
 #define __Adafruit_Madgwick_h__
+
+#include "Adafruit_AHRS_FusionInterface.h"
 #include <math.h>
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
-class Adafruit_Madgwick {
+class Adafruit_Madgwick : public Adafruit_AHRS_FusionInterface {
 private:
   static float invSqrt(float x);
   float beta; // algorithm gain

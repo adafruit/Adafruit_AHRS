@@ -12,12 +12,14 @@
 //=============================================================================================
 #ifndef __Adafruit_Mahony_h__
 #define __Adafruit_Mahony_h__
+
+#include "Adafruit_AHRS_FusionInterface.h"
 #include <math.h>
 
 //--------------------------------------------------------------------------------------------
 // Variable declaration
 
-class Adafruit_Mahony {
+class Adafruit_Mahony : public Adafruit_AHRS_FusionInterface {
 private:
   float twoKp; // 2 * proportional gain (Kp)
   float twoKi; // 2 * integral gain (Ki)
