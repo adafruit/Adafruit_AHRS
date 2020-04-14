@@ -243,7 +243,7 @@ void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax,
   } else {
     ValidMagCal = 0;
   }
-  
+
   // do a once-only orientation lock after the first valid magnetic calibration
   if (ValidMagCal && !FirstOrientationLock) {
     // get the 6DOF orientation matrix and initial inclination angle
