@@ -238,7 +238,7 @@ void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax,
   // initial orientation lock to accelerometer and magnetometer eCompass
   // orientation
   // *********************************************************************************
-  if (fabsf(mx) >= 20.0f && fabsf(mx) >= 20.0f && fabsf(mx) >= 20.0f) {
+  if (fabsf(mx) <= 50.0f && fabsf(my) <= 50.0f && fabsf(mz) <= 50.0f) {
     ValidMagCal = 1;
   } else {
     ValidMagCal = 0;
