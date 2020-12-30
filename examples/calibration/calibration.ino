@@ -15,7 +15,7 @@
 Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
 
 // uncomment one combo 9-DoF!
-#include "LSM6DS_LIS3MDL.h"  // update the LSM6DS_LIS3MDL file to set board to LSM6DS33, LSM6DS3U, LSM6DSOX
+#include "LSM6DS_LIS3MDL.h"  // see the the LSM6DS_LIS3MDL file in this project to change board to LSM6DS33, LSM6DS3U, LSM6DSOX, etc
 //#include "LSM9DS.h"           // LSM9DS1 or LSM9DS0
 //#include "NXP_FXOS_FXAS.h"  // NXP 9-DoF breakout
 
