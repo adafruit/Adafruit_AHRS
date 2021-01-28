@@ -37,11 +37,11 @@
 //-------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
-Adafruit_Mahony::Adafruit_Mahony() : Adafruit_Mahony(twoKpDef, twoKiDef){}
+Adafruit_Mahony::Adafruit_Mahony() : Adafruit_Mahony(twoKpDef, twoKiDef) {}
 
 Adafruit_Mahony::Adafruit_Mahony(float prop_gain, float int_gain) {
   twoKp = prop_gain; // 2 * proportional gain (Kp)
-  twoKi = int_gain; // 2 * integral gain (Ki)
+  twoKi = int_gain;  // 2 * integral gain (Ki)
   q0 = 1.0f;
   q1 = 0.0f;
   q2 = 0.0f;
@@ -245,13 +245,14 @@ void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
   anglesComputed = 0;
 }
 
-void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay, float az,
-		  float mx, float my, float mz){
-	update(gx,gy,gz,ax,ay,az,mx,my,mz,invSampleFreq);
+void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
+                             float az, float mx, float my, float mz) {
+  update(gx, gy, gz, ax, ay, az, mx, my, mz, invSampleFreq);
 }
 
-void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax, float ay, float az){
-	updateIMU(gx,gy,gz,ax,ay,az,invSampleFreq);
+void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
+                                float ay, float az) {
+  updateIMU(gx, gy, gz, ax, ay, az, invSampleFreq);
 };
 
 //-------------------------------------------------------------------------------------------

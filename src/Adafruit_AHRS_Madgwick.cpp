@@ -47,7 +47,8 @@ Adafruit_Madgwick::Adafruit_Madgwick(float gain) {
 }
 
 void Adafruit_Madgwick::update(float gx, float gy, float gz, float ax, float ay,
-                               float az, float mx, float my, float mz, float dt) {
+                               float az, float mx, float my, float mz,
+                               float dt) {
   float recipNorm;
   float s0, s1, s2, s3;
   float qDot1, qDot2, qDot3, qDot4;
@@ -266,14 +267,14 @@ void Adafruit_Madgwick::updateIMU(float gx, float gy, float gz, float ax,
   anglesComputed = 0;
 }
 
-  void Adafruit_Madgwick::update(float gx, float gy, float gz, float ax, float ay, float az,
-              float mx, float my, float mz){
-  	update(gx,gy,gz,ax,ay,az,mx,my,mz,invSampleFreq);
-  }
-  void Adafruit_Madgwick::updateIMU(float gx, float gy, float gz, float ax, float ay, float az){
-    	updateIMU(gx,gy,gz,ax,ay,az,invSampleFreq);
-  };
-
+void Adafruit_Madgwick::update(float gx, float gy, float gz, float ax, float ay,
+                               float az, float mx, float my, float mz) {
+  update(gx, gy, gz, ax, ay, az, mx, my, mz, invSampleFreq);
+}
+void Adafruit_Madgwick::updateIMU(float gx, float gy, float gz, float ax,
+                                  float ay, float az) {
+  updateIMU(gx, gy, gz, ax, ay, az, invSampleFreq);
+};
 
 //-------------------------------------------------------------------------------------------
 // Fast inverse square-root

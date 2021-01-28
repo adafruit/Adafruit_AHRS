@@ -45,7 +45,8 @@ public:
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
   void update(float gx, float gy, float gz, float ax, float ay, float az,
               float mx, float my, float mz, float dt);
-  void updateIMU(float gx, float gy, float gz, float ax, float ay, float az, float dt);
+  void updateIMU(float gx, float gy, float gz, float ax, float ay, float az,
+                 float dt);
   float getRoll() {
     if (!anglesComputed)
       computeAngles();
@@ -83,7 +84,7 @@ public:
     *z = q3;
   }
 
-  void setQuaternion(float w, float x, float y, float z){
+  void setQuaternion(float w, float x, float y, float z) {
     q0 = w;
     q1 = x;
     q2 = y;
