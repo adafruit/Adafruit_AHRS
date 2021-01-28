@@ -37,6 +37,8 @@
 //-------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
+Adafruit_Mahony::Adafruit_Mahony() : Adafruit_Mahony(twoKpDef, twoKiDef){}
+
 Adafruit_Mahony::Adafruit_Mahony(float prop_gain, float int_gain) {
   twoKp = prop_gain; // 2 * proportional gain (Kp)
   twoKi = int_gain; // 2 * integral gain (Ki)

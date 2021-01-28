@@ -34,6 +34,8 @@
 //-------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
+Adafruit_Madgwick::Adafruit_Madgwick() : Adafruit_Madgwick(betaDef) {}
+
 Adafruit_Madgwick::Adafruit_Madgwick(float gain) {
   beta = gain;
   q0 = 1.0f;

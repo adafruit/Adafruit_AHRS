@@ -40,6 +40,7 @@ private:
   //-------------------------------------------------------------------------------------------
   // Function declarations
 public:
+  Adafruit_Madgwick();
   Adafruit_Madgwick(float gain);
   void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
   void update(float gx, float gy, float gz, float ax, float ay, float az,
