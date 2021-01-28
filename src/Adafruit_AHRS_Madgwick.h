@@ -85,5 +85,11 @@ public:
     *y = q2;
     *z = q3;
   }
+  void setQuaternion(float w, float x, float y, float z) {
+    q0 = w;
+    q1 = x;
+    q2 = y;
+    q3 = z;
+  }
 };
 #endif

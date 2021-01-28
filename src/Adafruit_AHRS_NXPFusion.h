@@ -49,6 +49,13 @@ public:
     *z = qPl.q3;
   }
 
+  void setQuaternion(float w, float x, float y, float z) {
+    qPl.q0 = w;
+    qPl.q1 = x;
+    qPl.q2 = y;
+    qPl.q3 = z;
+  }
+
   typedef struct {
     float q0; // w
     float q1; // x
