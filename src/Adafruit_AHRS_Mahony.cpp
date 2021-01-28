@@ -37,9 +37,9 @@
 //-------------------------------------------------------------------------------------------
 // AHRS algorithm update
 
-Adafruit_Mahony::Adafruit_Mahony() {
-  twoKp = twoKpDef; // 2 * proportional gain (Kp)
-  twoKi = twoKiDef; // 2 * integral gain (Ki)
+Adafruit_Mahony::Adafruit_Mahony(float prop_gain, float int_gain) {
+  twoKp = prop_gain; // 2 * proportional gain (Kp)
+  twoKi = int_gain; // 2 * integral gain (Ki)
   q0 = 1.0f;
   q1 = 0.0f;
   q2 = 0.0f;
@@ -52,7 +52,7 @@ Adafruit_Mahony::Adafruit_Mahony() {
 }
 
 void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
-                             float az, float mx, float my, float mz) {
+                             float az, float mx, float my, float mz, float dt) {
   float recipNorm;
   float q0q0, q0q1, q0q2, q0q3, q1q1, q1q2, q1q3, q2q2, q2q3, q3q3;
   float hx, hy, bx, bz;
@@ -126,9 +126,9 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
     // Compute and apply integral feedback if enabled
     if (twoKi > 0.0f) {
       // integral error scaled by Ki
-      integralFBx += twoKi * halfex * invSampleFreq;
-      integralFBy += twoKi * halfey * invSampleFreq;
-      integralFBz += twoKi * halfez * invSampleFreq;
+      integralFBx += twoKi * halfex * dt;
+      integralFBy += twoKi * halfey * dt;
+      integralFBz += twoKi * halfez * dt;
       gx += integralFBx; // apply integral feedback
       gy += integralFBy;
       gz += integralFBz;
@@ -145,9 +145,9 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
   }
 
   // Integrate rate of change of quaternion
-  gx *= (0.5f * invSampleFreq); // pre-multiply common factors
-  gy *= (0.5f * invSampleFreq);
-  gz *= (0.5f * invSampleFreq);
+  gx *= (0.5f * dt); // pre-multiply common factors
+  gy *= (0.5f * dt);
+  gz *= (0.5f * dt);
   qa = q0;
   qb = q1;
   qc = q2;
@@ -169,7 +169,7 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
 // IMU algorithm update
 
 void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
-                                float ay, float az) {
+                                float ay, float az, float dt) {
   float recipNorm;
   float halfvx, halfvy, halfvz;
   float halfex, halfey, halfez;
@@ -204,9 +204,9 @@ void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
     // Compute and apply integral feedback if enabled
     if (twoKi > 0.0f) {
       // integral error scaled by Ki
-      integralFBx += twoKi * halfex * invSampleFreq;
-      integralFBy += twoKi * halfey * invSampleFreq;
-      integralFBz += twoKi * halfez * invSampleFreq;
+      integralFBx += twoKi * halfex * dt;
+      integralFBy += twoKi * halfey * dt;
+      integralFBz += twoKi * halfez * dt;
       gx += integralFBx; // apply integral feedback
       gy += integralFBy;
       gz += integralFBz;
@@ -223,9 +223,9 @@ void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
   }
 
   // Integrate rate of change of quaternion
-  gx *= (0.5f * invSampleFreq); // pre-multiply common factors
-  gy *= (0.5f * invSampleFreq);
-  gz *= (0.5f * invSampleFreq);
+  gx *= (0.5f * dt); // pre-multiply common factors
+  gy *= (0.5f * dt);
+  gz *= (0.5f * dt);
   qa = q0;
   qb = q1;
   qc = q2;
@@ -242,6 +242,15 @@ void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
   q3 *= recipNorm;
   anglesComputed = 0;
 }
+
+void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay, float az,
+		  float mx, float my, float mz){
+	update(gx,gy,gz,ax,ay,az,mx,my,mz,invSampleFreq);
+}
+
+void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax, float ay, float az){
+	updateIMU(gx,gy,gz,ax,ay,az,invSampleFreq);
+};
 
 //-------------------------------------------------------------------------------------------
 // Fast inverse square-root

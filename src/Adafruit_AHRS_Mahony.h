@@ -37,11 +37,14 @@ private:
   // Function declarations
 
 public:
-  Adafruit_Mahony();
+  Adafruit_Mahony(float prop_gain, float int_gain);
   void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
   void update(float gx, float gy, float gz, float ax, float ay, float az,
               float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
+  void update(float gx, float gy, float gz, float ax, float ay, float az,
+              float mx, float my, float mz, float dt);
+  void updateIMU(float gx, float gy, float gz, float ax, float ay, float az, float dt);
   float getRoll() {
     if (!anglesComputed)
       computeAngles();
