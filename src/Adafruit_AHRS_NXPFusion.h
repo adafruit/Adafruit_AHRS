@@ -31,10 +31,17 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+#ifndef __Adafruit_Nxp_Fusion_h_
+#define __Adafruit_Nxp_Fusion_h_
+
 // changed class name to avoid collision
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
   void begin(float sampleRate = 100.0f);
+  /*
+   * For roll, pitch, and yaw the accelerometer values can be either m/s^2 or g,
+   * but for linear acceleration to work they have to be in g.
+   */
   void update(float gx, float gy, float gz, float ax, float ay, float az,
               float mx, float my, float mz);
 
@@ -47,6 +54,33 @@ public:
     *x = qPl.q1;
     *y = qPl.q2;
     *z = qPl.q3;
+  }
+
+  /*
+   * Get the linear acceleration part of the acceleration value given to update in g.
+   */
+  void getLinearAcceleration(float *x, float *y, float *z) const {
+	  *x = aSePl[0];
+	  *y = aSePl[1];
+	  *z = aSePl[2];
+  }
+
+  /**
+   * The gravitational vector from the gyroscope values.
+   */
+  void getGravityVector(float *x, float *y, float *z) const {
+	  *x = gSeGyMi[0];
+	  *y = gSeGyMi[1];
+	  *z = gSeGyMi[2];
+  }
+
+  /*
+   * The global geomagnetic vector in uT.
+   */
+  void getGeomagneticVector(float *x, float *y, float *z) const {
+	  *x = mGl[0];
+	  *y = mGl[1];
+	  *z = mGl[2];
   }
 
   typedef struct {
@@ -120,3 +154,5 @@ private:
       FirstOrientationLock; // denotes that 9DOF orientation has locked to 6DOF
   int8_t resetflag;         // flag to request re-initialization on next pass
 };
+
+#endif
