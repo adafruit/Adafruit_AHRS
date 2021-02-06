@@ -57,30 +57,31 @@ public:
   }
 
   /*
-   * Get the linear acceleration part of the acceleration value given to update in g.
+   * Get the linear acceleration part of the acceleration value given to update
+   * in g.
    */
   void getLinearAcceleration(float *x, float *y, float *z) const {
-	  *x = aSePl[0];
-	  *y = aSePl[1];
-	  *z = aSePl[2];
+    *x = aSePl[0];
+    *y = aSePl[1];
+    *z = aSePl[2];
   }
 
   /**
    * The gravitational vector from the gyroscope values.
    */
   void getGravityVector(float *x, float *y, float *z) const {
-	  *x = gSeGyMi[0];
-	  *y = gSeGyMi[1];
-	  *z = gSeGyMi[2];
+    *x = gSeGyMi[0];
+    *y = gSeGyMi[1];
+    *z = gSeGyMi[2];
   }
 
   /*
    * The global geomagnetic vector in uT.
    */
   void getGeomagneticVector(float *x, float *y, float *z) const {
-	  *x = mGl[0];
-	  *y = mGl[1];
-	  *z = mGl[2];
+    *x = mGl[0];
+    *y = mGl[1];
+    *z = mGl[2];
   }
 
   typedef struct {
