@@ -1,4 +1,6 @@
-/*
+/*!
+ * @file Adafruit_AHRS_FusionInterface.h
+ *
  * The MIT License (MIT)
  *
  * Copyright (c) 2020 Ha Thach (tinyusb.org) for Adafruit Industries
@@ -28,12 +30,53 @@
 // Interface for Fusion Algorithm
 class Adafruit_AHRS_FusionInterface {
 public:
+  /**************************************************************************/
+  /*!
+   * @brief Initializes the sensor fusion filter.
+   * @param sampleFrequency The sensor sample rate in herz(samples per second).
+   */
+  /**************************************************************************/
   virtual void begin(float sampleFrequency) = 0;
+
+  /**************************************************************************/
+  /*!
+   * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer data.
+   * @param gx The gyroscope x axis. In DPS.
+   * @param gy The gyroscope y axis. In DPS.
+   * @param gz The gyroscope z axis. In DPS.
+   * @param ax The accelerometer x axis. In g.
+   * @param ay The accelerometer y axis. In g.
+   * @param az The accelerometer z axis. In g.
+   * @param mx The magnetometer x axis. In uT.
+   * @param my The magnetometer y axis. In uT.
+   * @param mz The magnetometer z axis. In uT.
+   */
+  /**************************************************************************/
   virtual void update(float gx, float gy, float gz, float ax, float ay,
                       float az, float mx, float my, float mz) = 0;
 
+  /**************************************************************************/
+  /*!
+   * @brief Gets the current roll of the sensors.
+   * @return The current sensor roll.
+   */
+  /**************************************************************************/
   virtual float getRoll() = 0;
+
+  /**************************************************************************/
+  /*!
+   * @brief Gets the current pitch of the sensors.
+   * @return The current sensor pitch.
+   */
+  /**************************************************************************/
   virtual float getPitch() = 0;
+
+  /**************************************************************************/
+  /*!
+   * @brief Gets the current yaw of the sensors.
+   * @return The current sensor yaw.
+   */
+  /**************************************************************************/
   virtual float getYaw() = 0;
   virtual void getQuaternion(float *w, float *x, float *y, float *z) = 0;
 };
