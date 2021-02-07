@@ -1,10 +1,5 @@
-#include "Adafruit_AHRS_FusionInterface.h"
-#include <Arduino.h>
-
 /*!
  * @file Adafruit_AHRS_NXPFusion.h
- *
- * @mainpage Adafruit NXP Sensor Fusion filter
  *
  * @section license License
  *
@@ -41,6 +36,9 @@
 #ifndef __Adafruit_Nxp_Fusion_h_
 #define __Adafruit_Nxp_Fusion_h_
 
+#include "Adafruit_AHRS_FusionInterface.h"
+#include <Arduino.h>
+
 // changed class name to avoid collision
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
@@ -50,7 +48,7 @@ public:
    * @param sampleFrequency The sensor sample rate in herz(samples per second).
    */
   /**************************************************************************/
-  void begin(float sampleRate = 100.0f);
+  void begin(float sampleFrequency = 100.0f);
 
   /**************************************************************************/
   /*!

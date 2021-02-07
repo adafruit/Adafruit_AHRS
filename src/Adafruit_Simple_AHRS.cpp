@@ -1,16 +1,34 @@
+/*!
+ * @file Adafruit_Simple_AHRS.cpp
+ *
+ * @mainpage Adafruit Simple AHRS
+ */
+
 #include "Adafruit_Simple_AHRS.h"
 
-// Create a simple AHRS from an explicit accelerometer and magnetometer sensor.
+/**************************************************************************/
+/*!
+ * @brief Create a simple AHRS from a device with multiple sensors.
+ */
+/**************************************************************************/
 Adafruit_Simple_AHRS::Adafruit_Simple_AHRS(Adafruit_Sensor *accelerometer,
                                            Adafruit_Sensor *magnetometer)
     : _accel(accelerometer), _mag(magnetometer) {}
 
-// Create a simple AHRS from a device with multiple sensors.
+/**************************************************************************/
+/*!
+ * @brief Create a simple AHRS from a device with multiple sensors.
+ */
+/**************************************************************************/
 Adafruit_Simple_AHRS::Adafruit_Simple_AHRS(Adafruit_Sensor_Set &sensors)
     : _accel(sensors.getSensor(SENSOR_TYPE_ACCELEROMETER)),
       _mag(sensors.getSensor(SENSOR_TYPE_MAGNETIC_FIELD)) {}
 
-// Compute orientation based on accelerometer and magnetometer data.
+/**************************************************************************/
+/*!
+ * @brief Compute orientation based on accelerometer and magnetometer data.
+ */
+/**************************************************************************/
 bool Adafruit_Simple_AHRS::getOrientation(sensors_vec_t *orientation) {
   // Validate input and available sensors.
   if (orientation == NULL || _accel == NULL || _mag == NULL)

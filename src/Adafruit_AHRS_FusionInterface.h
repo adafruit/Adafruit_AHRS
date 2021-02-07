@@ -1,6 +1,8 @@
 /*!
  * @file Adafruit_AHRS_FusionInterface.h
  *
+ * @section license License
+ *
  * The MIT License (MIT)
  *
  * Copyright (c) 2020 Ha Thach (tinyusb.org) for Adafruit Industries

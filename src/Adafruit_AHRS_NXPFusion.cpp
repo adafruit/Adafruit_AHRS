@@ -121,10 +121,9 @@ void fmatrixAeqRenormRotA(float A[][3]);
 /**************************************************************************/
 /*!
  * @brief Initializes the 9DOF Kalman filter.
- * @param sampleFrequency The sensor sample rate in herz(samples per second).
  */
 /**************************************************************************/
-void Adafruit_NXPSensorFusion::begin(float sampleRate) {
+void Adafruit_NXPSensorFusion::begin(float sampleFrequency) {
   int8_t i, j;
 
   // reset the flag denoting that a first 9DOF orientation lock has been
@@ -133,7 +132,7 @@ void Adafruit_NXPSensorFusion::begin(float sampleRate) {
 
   // compute and store useful product terms to save floating point calculations
   // later
-  Fastdeltat = 1.0f / sampleRate;
+  Fastdeltat = 1.0f / sampleFrequency;
   deltat = Fastdeltat;
   deltatsq = deltat * deltat;
   casq = FCA_9DOF_GBY_KALMAN * FCA_9DOF_GBY_KALMAN;
@@ -201,19 +200,6 @@ void Adafruit_NXPSensorFusion::begin(float sampleRate) {
 /**************************************************************************/
 /*!
  * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer data.
- * 9DOF orientation function implemented using a 12 element Kalman filter
- * void fRun_9DOF_GBY_KALMAN(SV_9DOF_GBY_KALMAN_t *SV,
- * const AccelSensor_t *Accel, const MagSensor_t *Mag, const GyroSensor_t *Gyro,
- * const MagCalibration_t *MagCal)
- * @param gx The gyroscope x axis. In DPS.
- * @param gy The gyroscope y axis. In DPS.
- * @param gz The gyroscope z axis. In DPS.
- * @param ax The accelerometer x axis. In g.
- * @param ay The accelerometer y axis. In g.
- * @param az The accelerometer z axis. In g.
- * @param mx The magnetometer x axis. In uT.
- * @param my The magnetometer y axis. In uT.
- * @param mz The magnetometer z axis. In uT.
  */
 /**************************************************************************/
 void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax,
