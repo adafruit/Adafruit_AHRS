@@ -35,6 +35,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Initializes the sensor fusion filter.
+   *
    * @param sampleFrequency The sensor sample rate in herz(samples per second).
    */
   /**************************************************************************/
@@ -42,7 +43,9 @@ public:
 
   /**************************************************************************/
   /*!
-   * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer data.
+   * @brief Updates the filter with new gyroscope, accelerometer, and
+   * magnetometer data.
+   *
    * @param gx The gyroscope x axis. In DPS.
    * @param gy The gyroscope y axis. In DPS.
    * @param gz The gyroscope z axis. In DPS.
@@ -60,6 +63,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Gets the current roll of the sensors.
+   *
    * @return The current sensor roll.
    */
   /**************************************************************************/
@@ -68,6 +72,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Gets the current pitch of the sensors.
+   *
    * @return The current sensor pitch.
    */
   /**************************************************************************/
@@ -76,6 +81,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Gets the current yaw of the sensors.
+   *
    * @return The current sensor yaw.
    */
   /**************************************************************************/

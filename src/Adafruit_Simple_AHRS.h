@@ -13,6 +13,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Create a simple AHRS from a device with multiple sensors.
+   *
    * @param accelerometer The accelerometer to use for this sensor fusion.
    * @param magnetometer The magnetometer to use for this sensor fusion.
    */
@@ -23,8 +24,9 @@ public:
   /**************************************************************************/
   /*!
    * @brief Create a simple AHRS from a device with multiple sensors.
-   * @param sensors A set of sensors containing the accelerometer and magnetometer
-   * for this sensor fusion.
+   *
+   * @param sensors A set of sensors containing the accelerometer and
+   * magnetometer for this sensor fusion.
    */
   /**************************************************************************/
   Adafruit_Simple_AHRS(Adafruit_Sensor_Set &sensors);

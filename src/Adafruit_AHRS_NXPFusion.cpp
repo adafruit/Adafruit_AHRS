@@ -199,7 +199,8 @@ void Adafruit_NXPSensorFusion::begin(float sampleFrequency) {
 
 /**************************************************************************/
 /*!
- * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer data.
+ * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer
+ * data.
  */
 /**************************************************************************/
 void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax,

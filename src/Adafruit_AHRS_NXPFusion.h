@@ -45,6 +45,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Initializes the 9DOF Kalman filter.
+   *
    * @param sampleFrequency The sensor sample rate in herz(samples per second).
    */
   /**************************************************************************/
@@ -52,15 +53,15 @@ public:
 
   /**************************************************************************/
   /*!
-   * @brief Updates the filter with new gyroscope, accelerometer, and magnetometer data.
-   * For roll, pitch, and yaw the accelerometer values can be either m/s^2 or g,
-   * but for linear acceleration to work they have to be in g.
+   * @brief Updates the filter with new gyroscope, accelerometer, and
+   * magnetometer data. For roll, pitch, and yaw the accelerometer values can be
+   * either m/s^2 or g, but for linear acceleration they have to be in g.
    *
    * 9DOF orientation function implemented using a 12 element Kalman filter
    *
    * void fRun_9DOF_GBY_KALMAN(SV_9DOF_GBY_KALMAN_t *SV,
-   * const AccelSensor_t *Accel, const MagSensor_t *Mag, const GyroSensor_t *Gyro,
-   * const MagCalibration_t *MagCal)
+   * const AccelSensor_t *Accel, const MagSensor_t *Mag,
+   * const GyroSensor_t *Gyro, const MagCalibration_t *MagCal)
    *
    * @param gx The gyroscope x axis. In DPS.
    * @param gy The gyroscope y axis. In DPS.
@@ -89,7 +90,9 @@ public:
 
   /**************************************************************************/
   /*!
-   * @brief Get the linear acceleration part of the acceleration value given to update.
+   * @brief Get the linear acceleration part of the acceleration value given to
+   * update.
+   *
    * @param x The pointer to write the linear acceleration x axis to. In g.
    * @param y The pointer to write the linear acceleration y axis to. In g.
    * @param z The pointer to write the linear acceleration z axis to. In g.
@@ -104,6 +107,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Get the gravity vector from the gyroscope values.
+   *
    * @param x The pointer to write the gravity vector x axis to. In g.
    * @param y The pointer to write the gravity vector y axis to. In g.
    * @param z The pointer to write the gravity vector z axis to. In g.
@@ -118,6 +122,7 @@ public:
   /**************************************************************************/
   /*!
    * @brief Get the geomagnetic vector in global frame.
+   *
    * @param x The pointer to write the geomagnetic vector x axis to. In uT.
    * @param y The pointer to write the geomagnetic vector y axis to. In uT.
    * @param z The pointer to write the geomagnetic vector z axis to. In uT.
