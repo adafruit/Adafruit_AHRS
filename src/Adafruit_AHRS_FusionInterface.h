@@ -29,7 +29,9 @@
 #ifndef ADAFRUIT_AHRS_FUSIONINTERFACE_H_
 #define ADAFRUIT_AHRS_FUSIONINTERFACE_H_
 
-// Interface for Fusion Algorithm
+/*!
+ * @brief The common interface for the fusion algorithms.
+ */
 class Adafruit_AHRS_FusionInterface {
 public:
   /**************************************************************************/

@@ -1,7 +1,5 @@
 /*!
  * @file Adafruit_Simple_AHRS.cpp
- *
- * @mainpage Adafruit Simple AHRS
  */
 
 #include "Adafruit_Simple_AHRS.h"

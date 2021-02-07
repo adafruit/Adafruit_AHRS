@@ -39,7 +39,9 @@
 #include "Adafruit_AHRS_FusionInterface.h"
 #include <Arduino.h>
 
-// changed class name to avoid collision
+/*!
+ * @brief Kalman/NXP Fusion algorithm.
+ */
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
   /**************************************************************************/

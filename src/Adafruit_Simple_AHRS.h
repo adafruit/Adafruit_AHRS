@@ -7,7 +7,9 @@
 #include "Adafruit_Sensor_Set.h"
 #include <Adafruit_Sensor.h>
 
-// Simple sensor fusion AHRS using an accelerometer and magnetometer.
+/*!
+ * @brief Simple sensor fusion AHRS using an accelerometer and magnetometer.
+ */
 class Adafruit_Simple_AHRS {
 public:
   /**************************************************************************/

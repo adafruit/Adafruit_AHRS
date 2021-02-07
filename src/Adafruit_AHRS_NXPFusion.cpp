@@ -1,8 +1,6 @@
 /*!
  * @file Adafruit_AHRS_NXPFusion.cpp
  *
- * @mainpage Adafruit NXP Sensor Fusion filter
- *
  * @section license License
  *
  * Copyright (c) 2014, Freescale Semiconductor, Inc.
