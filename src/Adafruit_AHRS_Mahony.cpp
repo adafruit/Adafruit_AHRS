@@ -62,9 +62,12 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
 
   // Use IMU algorithm if magnetometer measurement invalid
   // (avoids NaN in magnetometer normalisation)
-  if ((mx == 0.0f) && (my == 0.0f) && (mz == 0.0f)) {
-    updateIMU(gx, gy, gz, ax, ay, az);
-    return;
+  if ((mx != 0.0f) && (my != 0.0f) && (mz != 0.0f)) {
+    // Normalise magnetometer measurement only if possible
+    recipNorm = invSqrt(mx * mx + my * my + mz * mz);
+    mx *= recipNorm;
+    my *= recipNorm;
+    mz *= recipNorm;
   }
 
   // Convert gyroscope degrees/sec to radians/sec
@@ -82,11 +85,6 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
     ay *= recipNorm;
     az *= recipNorm;
 
-    // Normalise magnetometer measurement
-    recipNorm = invSqrt(mx * mx + my * my + mz * mz);
-    mx *= recipNorm;
-    my *= recipNorm;
-    mz *= recipNorm;
 
     // Auxiliary variables to avoid repeated arithmetic
     q0q0 = q0 * q0;
@@ -170,6 +168,7 @@ void Adafruit_Mahony::update(float gx, float gy, float gz, float ax, float ay,
 
 void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
                                 float ay, float az) {
+/*-------------- can be removed --------------
   float recipNorm;
   float halfvx, halfvy, halfvz;
   float halfex, halfey, halfez;
@@ -241,6 +240,7 @@ void Adafruit_Mahony::updateIMU(float gx, float gy, float gz, float ax,
   q2 *= recipNorm;
   q3 *= recipNorm;
   anglesComputed = 0;
+-------------- end of can be removed -------------- */
 }
 
 //-------------------------------------------------------------------------------------------
