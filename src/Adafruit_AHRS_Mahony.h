@@ -42,6 +42,18 @@ public:
   void update(float gx, float gy, float gz, float ax, float ay, float az,
               float mx, float my, float mz);
   void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);
+  float getKp() {
+    return twoKp / 2.0f;
+  }
+  void setKp(float Kp) {
+    twoKp = 2.0f * Kp;
+  }
+  float getKi() {
+    return twoKi / 2.0f;
+  }
+  void setKi(float Ki) {
+    twoKi = 2.0f * Ki;
+  }
   float getRoll() {
     if (!anglesComputed)
       computeAngles();
