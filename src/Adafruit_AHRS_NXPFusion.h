@@ -95,6 +95,7 @@ public:
     qPl.q1 = x;
     qPl.q2 = y;
     qPl.q3 = z;
+  }
   /**************************************************************************/
   /*!
    * @brief Get the linear acceleration part of the acceleration value given to
