@@ -93,3 +93,4 @@ public:
 };
 
 #endif /* ADAFRUIT_AHRS_FUSIONINTERFACE_H_ */
+
