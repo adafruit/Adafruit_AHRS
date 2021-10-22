@@ -61,7 +61,7 @@ public:
   /**************************************************************************/
   virtual void update(float gx, float gy, float gz, float ax, float ay,
                       float az, float mx, float my, float mz) = 0;
-  
+
   /**************************************************************************/
   /*!
    * @brief Gets the current roll of the sensors.
