@@ -1,40 +1,81 @@
+/*!
+ * @file Adafruit_AHRS_NXPFusion.h
+ *
+ * @section license License
+ *
+ * This is a modification of
+ * https://github.com/memsindustrygroup/Open-Source-Sensor-Fusion/blob/master/Sources/tasks.h
+ * by PJRC / Paul Stoffregen https://github.com/PaulStoffregen/NXPMotionSense
+ *
+ * Copyright (c) 2014, Freescale Semiconductor, Inc.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Freescale Semiconductor, Inc. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL FREESCALE SEMICONDUCTOR, INC. BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#ifndef __Adafruit_Nxp_Fusion_h_
+#define __Adafruit_Nxp_Fusion_h_
+
 #include "Adafruit_AHRS_FusionInterface.h"
 #include <Arduino.h>
 
-// This is a modification of
-// https://github.com/memsindustrygroup/Open-Source-Sensor-Fusion/blob/master/Sources/tasks.h
-// by PJRC / Paul Stoffregen https://github.com/PaulStoffregen/NXPMotionSense
-
-// Copyright (c) 2014, Freescale Semiconductor, Inc.
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of Freescale Semiconductor, Inc. nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-// ARE DISCLAIMED. IN NO EVENT SHALL FREESCALE SEMICONDUCTOR, INC. BE LIABLE FOR
-// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-
-// changed class name to avoid collision
+/*!
+ * @brief Kalman/NXP Fusion algorithm.
+ */
 class Adafruit_NXPSensorFusion : public Adafruit_AHRS_FusionInterface {
 public:
-  void begin(float sampleRate = 100.0f);
+  /**************************************************************************/
+  /*!
+   * @brief Initializes the 9DOF Kalman filter.
+   *
+   * @param sampleFrequency The sensor sample rate in herz(samples per second).
+   */
+  /**************************************************************************/
+  void begin(float sampleFrequency = 100.0f);
+
+  /**************************************************************************/
+  /*!
+   * @brief Updates the filter with new gyroscope, accelerometer, and
+   * magnetometer data. For roll, pitch, and yaw the accelerometer values can be
+   * either m/s^2 or g, but for linear acceleration they have to be in g.
+   *
+   * 9DOF orientation function implemented using a 12 element Kalman filter
+   *
+   * void fRun_9DOF_GBY_KALMAN(SV_9DOF_GBY_KALMAN_t *SV,
+   * const AccelSensor_t *Accel, const MagSensor_t *Mag,
+   * const GyroSensor_t *Gyro, const MagCalibration_t *MagCal)
+   *
+   * @param gx The gyroscope x axis. In DPS.
+   * @param gy The gyroscope y axis. In DPS.
+   * @param gz The gyroscope z axis. In DPS.
+   * @param ax The accelerometer x axis. In g.
+   * @param ay The accelerometer y axis. In g.
+   * @param az The accelerometer z axis. In g.
+   * @param mx The magnetometer x axis. In uT.
+   * @param my The magnetometer y axis. In uT.
+   * @param mz The magnetometer z axis. In uT.
+   */
+  /**************************************************************************/
   void update(float gx, float gy, float gz, float ax, float ay, float az,
               float mx, float my, float mz);
 
@@ -54,6 +95,50 @@ public:
     qPl.q1 = x;
     qPl.q2 = y;
     qPl.q3 = z;
+  /**************************************************************************/
+  /*!
+   * @brief Get the linear acceleration part of the acceleration value given to
+   * update.
+   *
+   * @param x The pointer to write the linear acceleration x axis to. In g.
+   * @param y The pointer to write the linear acceleration y axis to. In g.
+   * @param z The pointer to write the linear acceleration z axis to. In g.
+   */
+  /**************************************************************************/
+  void getLinearAcceleration(float *x, float *y, float *z) const {
+    *x = aSePl[0];
+    *y = aSePl[1];
+    *z = aSePl[2];
+  }
+
+  /**************************************************************************/
+  /*!
+   * @brief Get the gravity vector from the gyroscope values.
+   *
+   * @param x The pointer to write the gravity vector x axis to. In g.
+   * @param y The pointer to write the gravity vector y axis to. In g.
+   * @param z The pointer to write the gravity vector z axis to. In g.
+   */
+  /**************************************************************************/
+  void getGravityVector(float *x, float *y, float *z) const {
+    *x = gSeGyMi[0];
+    *y = gSeGyMi[1];
+    *z = gSeGyMi[2];
+  }
+
+  /**************************************************************************/
+  /*!
+   * @brief Get the geomagnetic vector in global frame.
+   *
+   * @param x The pointer to write the geomagnetic vector x axis to. In uT.
+   * @param y The pointer to write the geomagnetic vector y axis to. In uT.
+   * @param z The pointer to write the geomagnetic vector z axis to. In uT.
+   */
+  /**************************************************************************/
+  void getGeomagneticVector(float *x, float *y, float *z) const {
+    *x = mGl[0];
+    *y = mGl[1];
+    *z = mGl[2];
   }
 
   typedef struct {
@@ -127,3 +212,5 @@ private:
       FirstOrientationLock; // denotes that 9DOF orientation has locked to 6DOF
   int8_t resetflag;         // flag to request re-initialization on next pass
 };
+
+#endif
