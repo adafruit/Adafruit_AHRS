@@ -90,6 +90,12 @@ public:
     *z = qPl.q3;
   }
 
+  void setQuaternion(float w, float x, float y, float z) {
+    qPl.q0 = w;
+    qPl.q1 = x;
+    qPl.q2 = y;
+    qPl.q3 = z;
+  }
   /**************************************************************************/
   /*!
    * @brief Get the linear acceleration part of the acceleration value given to

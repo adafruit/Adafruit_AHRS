@@ -89,6 +89,7 @@ public:
   /**************************************************************************/
   virtual float getYaw() = 0;
   virtual void getQuaternion(float *w, float *x, float *y, float *z) = 0;
+  virtual void setQuaternion(float w, float x, float y, float z) = 0;
 };
 
 #endif /* ADAFRUIT_AHRS_FUSIONINTERFACE_H_ */
