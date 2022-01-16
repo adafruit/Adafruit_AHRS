@@ -90,6 +90,16 @@ public:
   virtual float getYaw() = 0;
   virtual void getQuaternion(float *w, float *x, float *y, float *z) = 0;
   virtual void setQuaternion(float w, float x, float y, float z) = 0;
+
+  /**************************************************************************/
+  /*!
+   * @brief Gets the current gravity vector of the sensor.
+   *
+   * @param x A float pointer to write the gravity vector x component to. In g.
+   * @param y A float pointer to write the gravity vector y component to. In g.
+   * @param z A float pointer to write the gravity vector z component to. In g.
+   */
+  virtual void getGravityVector(float *x, float *y, float *z) = 0;
 };
 
 #endif /* ADAFRUIT_AHRS_FUSIONINTERFACE_H_ */
