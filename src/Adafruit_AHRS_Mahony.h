@@ -30,7 +30,7 @@ private:
   float invSampleFreq;
   float roll, pitch, yaw;
   float grav[3];
-  bool anglesComputed;
+  bool anglesComputed = false;
   static float invSqrt(float x);
   void computeAngles();
 

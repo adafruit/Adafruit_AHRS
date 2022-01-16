@@ -43,7 +43,7 @@ Adafruit_Madgwick::Adafruit_Madgwick(float gain) {
   q2 = 0.0f;
   q3 = 0.0f;
   invSampleFreq = 1.0f / sampleFreqDef;
-  anglesComputed = 0;
+  anglesComputed = false;
 }
 
 void Adafruit_Madgwick::update(float gx, float gy, float gz, float ax, float ay,
