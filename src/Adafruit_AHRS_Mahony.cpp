@@ -49,7 +49,7 @@ Adafruit_Mahony::Adafruit_Mahony(float prop_gain, float int_gain) {
   integralFBx = 0.0f;
   integralFBy = 0.0f;
   integralFBz = 0.0f;
-  anglesComputed = 0;
+  anglesComputed = false;
   invSampleFreq = 1.0f / DEFAULT_SAMPLE_FREQ;
 }
 

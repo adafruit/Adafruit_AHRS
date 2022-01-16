@@ -33,7 +33,7 @@ private:
   float invSampleFreq;
   float roll, pitch, yaw;
   float grav[3];
-  char anglesComputed;
+  bool anglesComputed = false;
   void computeAngles();
 
   //-------------------------------------------------------------------------------------------
@@ -98,6 +98,8 @@ public:
     q3 = z;
   }
   void getGravityVector(float *x, float *y, float *z) {
+    if (!anglesComputed)
+      computeAngles();
     *x = grav[0];
     *y = grav[1];
     *z = grav[2];
