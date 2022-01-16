@@ -116,12 +116,12 @@ public:
   /*!
    * @brief Get the gravity vector from the gyroscope values.
    *
-   * @param x The pointer to write the gravity vector x axis to. In g.
-   * @param y The pointer to write the gravity vector y axis to. In g.
-   * @param z The pointer to write the gravity vector z axis to. In g.
+   * @param x A float pointer to write the gravity vector x component to. In g.
+   * @param y A float pointer to write the gravity vector y component to. In g.
+   * @param z A float pointer to write the gravity vector z component to. In g.
    */
   /**************************************************************************/
-  void getGravityVector(float *x, float *y, float *z) const {
+  void getGravityVector(float *x, float *y, float *z) {
     *x = gSeGyMi[0];
     *y = gSeGyMi[1];
     *z = gSeGyMi[2];

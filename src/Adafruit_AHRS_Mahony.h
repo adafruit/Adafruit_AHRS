@@ -29,6 +29,7 @@ private:
       integralFBz; // integral error terms scaled by Ki
   float invSampleFreq;
   float roll, pitch, yaw;
+  float grav[3];
   char anglesComputed;
   static float invSqrt(float x);
   void computeAngles();
@@ -87,12 +88,16 @@ public:
     *y = q2;
     *z = q3;
   }
-
   void setQuaternion(float w, float x, float y, float z) {
     q0 = w;
     q1 = x;
     q2 = y;
     q3 = z;
+  }
+  void getGravityVector(float *x, float *y, float *z) {
+    *x = grav[0];
+    *y = grav[1];
+    *z = grav[2];
   }
 };
 

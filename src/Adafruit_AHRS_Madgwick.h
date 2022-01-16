@@ -31,9 +31,8 @@ private:
   float q2;
   float q3; // quaternion of sensor frame relative to auxiliary frame
   float invSampleFreq;
-  float roll;
-  float pitch;
-  float yaw;
+  float roll, pitch, yaw;
+  float grav[3];
   char anglesComputed;
   void computeAngles();
 
@@ -97,6 +96,11 @@ public:
     q1 = x;
     q2 = y;
     q3 = z;
+  }
+  void getGravityVector(float *x, float *y, float *z) {
+    *x = grav[0];
+    *y = grav[1];
+    *z = grav[2];
   }
 };
 #endif
