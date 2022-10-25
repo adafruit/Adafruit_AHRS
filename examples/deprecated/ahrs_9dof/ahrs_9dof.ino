@@ -1,11 +1,12 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_LSM303_U.h>
+#include <Adafruit_LSM303_Accel.h>
+#include <Adafruit_LSM303DLH_Mag.h>
 #include <Adafruit_Simple_AHRS.h>
 
 // Create sensor instances.
-Adafruit_LSM303_Accel_Unified accel(30301);
-Adafruit_LSM303_Mag_Unified   mag(30302);
+Adafruit_LSM303_Accel_Unified  accel(30301);
+Adafruit_LSM303DLH_Mag_Unified mag(30302);
 
 // Create simple AHRS algorithm using the above sensors.
 Adafruit_Simple_AHRS          ahrs(&accel, &mag);
