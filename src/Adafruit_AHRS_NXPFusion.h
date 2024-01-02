@@ -37,7 +37,11 @@
 #define __Adafruit_Nxp_Fusion_h_
 
 #include "Adafruit_AHRS_FusionInterface.h"
+#ifdef ARDUINO
 #include <Arduino.h>
+#else
+#include <stdint.h>
+#endif
 
 /*!
  * @brief Kalman/NXP Fusion algorithm.
