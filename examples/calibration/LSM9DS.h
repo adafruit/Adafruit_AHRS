@@ -1,5 +1,5 @@
-//#include <Adafruit_LSM9DS1.h>
-// Adafruit_LSM9DS1 lsm9ds = Adafruit_LSM9DS1();
+// #include <Adafruit_LSM9DS1.h>
+//  Adafruit_LSM9DS1 lsm9ds = Adafruit_LSM9DS1();
 
 // Or if you have the older LSM9DS0
 #include <Adafruit_LSM9DS0.h>

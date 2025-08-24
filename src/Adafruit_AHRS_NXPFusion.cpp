@@ -633,7 +633,7 @@ void Adafruit_NXPSensorFusion::update(float gx, float gy, float gz, float ax,
       mGl[X] = DEFAULTB * fcosdelta; // TODO: MagCal->B
       mGl[Z] = DEFAULTB * fsindelta;
     } // end hyp == 0.0F
-  }   // end ValidMagCal
+  } // end ValidMagCal
 
   // *********************************************************************************
   // compute the a posteriori Euler angles from the orientation matrix
