@@ -296,9 +296,9 @@ void eigencompute(float A[][10], float eigval[], float eigvec[][10], int8_t n) {
               A[ic][j] = A[ic][j] + sinphi * (ftmp - tanhalfphi * A[ic][j]);
             }
           } // end of test for matrix element already zero
-        }   // end of loop over columns
-      }     // end of loop over rows
-    }       // end of test for non-zero residue
+        } // end of loop over columns
+      } // end of loop over rows
+    } // end of test for non-zero residue
   } while ((residue > 0.0F) && (ctr++ < NITERATIONS)); // end of main loop
 }
 

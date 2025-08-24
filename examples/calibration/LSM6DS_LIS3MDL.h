@@ -6,7 +6,7 @@ Adafruit_LIS3MDL lis3mdl;
 #include <Adafruit_LSM6DS33.h>
 Adafruit_LSM6DS33 lsm6ds;
 // For (newer) Feather Sense with LSM6DS3TR-C, use this:
-//#include <Adafruit_LSM6DS3TRC.h>
+// #include <Adafruit_LSM6DS3TRC.h>
 // Adafruit_LSM6DS3TRC lsm6ds;
 
 bool init_sensors(void) {
