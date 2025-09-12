@@ -54,7 +54,7 @@ public:
   // q1 * q3 + 2.0f * q0 * q2);}; float getYaw(){return atan2f(2.0f * q1 * q2
   // - 2.0f * q0 * q3, 2.0f * q0 * q0 + 2.0f * q1 * q1 - 1.0f);};
   float getBeta() { return beta; }
-  void setBeta(float beta) { this->beta = beta; }
+  void setBeta(float betaValue) { this->beta = betaValue; }
   float getRoll() {
     if (!anglesComputed)
       computeAngles();
